@@ -1,7 +1,5 @@
 import unittest
 from PersonEndPointLib import PersonEndPointLib
-import ConfigParser
-import os
 import json
 from testconfig import config
 
