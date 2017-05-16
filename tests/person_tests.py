@@ -3,14 +3,18 @@ from PersonEndPointLib import PersonEndPointLib
 import ConfigParser
 import os
 import json
+from testconfig import config
 
 class PersonTests(unittest.TestCase):
 
     def setUp(self):
-        config = ConfigParser.ConfigParser()
-        config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), '../config', 'default.ini'))
-        api_key_config = config.get("movie_db", "api_v3_key")
-        self.person_endpoint_lib = PersonEndPointLib(api_key_config)
+        try:
+            api_key_config = config['movie_db']['api_v3_key']
+            self.person_endpoint_lib = PersonEndPointLib(api_key_config)
+        except KeyError as ke:
+            print "Failed to retrieve the api key from the config.  Cannot run test!"
+            print "Please update the config/default.ini file with a valid API key and pass that config to nose, i.e.: "
+            print "nosetests --tc-file=config/default.ini tests/person_tests.py"
 
     def test_01_get_person_details_valid_key(self):
         """Get Person details with an valid api key
