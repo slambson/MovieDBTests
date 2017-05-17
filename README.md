@@ -9,4 +9,4 @@ Developed using:
 
 To run tests
 1. Open the file config/default.ini and update with a valid API key
-2. From the root directory of the project run:  nosetests -c config/default.ini tests/person_tests.py
+2. From the root directory of the project run:  nosetests --tc-file=config/default.ini tests/person_tests.py
